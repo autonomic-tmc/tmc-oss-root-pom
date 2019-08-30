@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.autonomic.tmc</groupId>
+  <artifactId>tmc-oss-root</artifactId>
+  <version>LOCAL-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+
+  <name>TMC OSS Root POM</name>
+
+  <organization>
+    <name>Autonomic, LLC</name>
+    <url>http://autonomic.ai</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
+  <modules>
+    <module>tmc-oss-license</module>
+    <module>tmc-oss-parent</module>
+  </modules>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>au-tmc-oss-repo</id>
+      <url>https://api.bintray.com/maven/autonomic/au-tmc-oss/${project.artifactId}/;publish=1</url>
+    </repository>
+  </distributionManagement>
+
+
+</project>

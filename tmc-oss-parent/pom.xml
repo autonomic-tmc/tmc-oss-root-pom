@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>tmc-oss-parent</artifactId>
+  <version>LOCAL-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.autonomic.tmc</groupId>
+    <artifactId>tmc-root</artifactId>
+    <version>LOCAL-SNAPSHOT</version>
+  </parent>
+
+  <name>TMC OSS Parent POM</name>
+
+  <organization>
+    <name>Autonomic, LLC</name>
+    <url>http://autonomic.ai</url>
+  </organization>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>1.16</version>
+        <configuration>
+
+          <!-- - - - - - - - - - - - - - - - -
+          Begin license/header generation
+          - - - - - - - - - - - - - - - - - -->
+          <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+          <inceptionYear>2016</inceptionYear>
+          <licenseName>apache2_v1</licenseName>
+          <licenseResolver>classpath://tmc-oss-license</licenseResolver>
+          <copyrightOwners>Autonomic, LLC</copyrightOwners>
+          <outputDirectory>${project.basedir}</outputDirectory>
+          <licenseFile>${basedir}/LICENSE</licenseFile>
+          <ignoreTag>(license-maven-plugin.skip)</ignoreTag>
+
+          <processStartTag>‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾</processStartTag>
+          <processEndTag>______________________________________________________________________________</processEndTag>
+          <sectionDelimiter>——————————————————————————————————————————————————————————————————————————————</sectionDelimiter>
+
+          <!-- - - - - - - - - - - - - - - - -
+          Begin dependency license validation
+          - - - - - - - - - - - - - - - - - -->
+          <encoding>UTF-8</encoding>
+          <failOnBlacklist>true</failOnBlacklist>
+          <failOnMissing>true</failOnMissing>
+          <failIfWarning>true</failIfWarning>
+
+          <includedLicenses>GNU Lesser General Public License v2.1|Apache License, Version 2.0|MIT-License|BSD 2-Clause|BSD 3-Clause|CDDL 1.1|The JSON License|MPL 1.1|Eclipse Public License 1.0|Eclipse Public License 2.0|Common Public License Version 1.0|Public Domain|Eclipse Distribution License 1.0|The PostgreSQL License|GNU Lesser General Public License, Version 3.0|Apache License, Version 1.1</includedLicenses>
+          <licenseMerges>
+            <licenseMerge>Apache License, Version 2.0|Apache License Version 2.0|Apache License v2.0|Apache 2|Apache 2.0|The Apache Software License, Version 2.0|The Apache Software License, version 2.0|Apache License, version 2.0|Apache License 2.0|Apache Software Licenses|ASL, version 2|The Apache License, Version 2.0| Apache-2.0|Apache License|Apache Public License 2.0|APACHE LICENSE 2.0|Apache Software License, version 2.0|Apache Software License - Version 2.0</licenseMerge>
+            <licenseMerge>Common Public License Version 1.0|CPL</licenseMerge>
+            <licenseMerge>MIT-License|MIT License|MIT|The MIT License|MIT license|Bouncy Castle Licence|The MIT License(MIT)|The MIT License (MIT)</licenseMerge>
+            <licenseMerge>BSD 3-Clause|BSD 3-clause|New BSD License|New BSD license|BSD 3-clause New License|BSD New license|The New BSD License|BSD|The BSD License|BSD License|BSD Licence 3|BSD-style license|3-Clause BSD License|The BSD 3-Clause License</licenseMerge>
+            <licenseMerge>Eclipse Public License 1.0|Eclipse Public License v1.0|Eclipse Public License - v 1.0|Eclipse Public License (EPL), Version 1.0|EPL 1.0|Eclipse Public License - Version 1.0|Eclipse Public License, Version 1.0|MPL 2.0, and EPL 1.0|MPL 2.0 or EPL 1.0</licenseMerge>
+            <licenseMerge>Eclipse Public License 2.0|Eclipse Public License - v 2.0|Eclipse Public License (EPL), Version 2.0|EPL 2.0|Eclipse Public License - Version 2.0|Eclipse Public License, Version 2.0|Eclipse Public License v2.0</licenseMerge>
+            <licenseMerge>CDDL 1.1|CDDL+GPL License|CDDL + GPLv2 with classpath exception|CDDL|GPLv2+CE|CDDL/GPLv2+CE|Common Development and Distribution License|COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0|Common Development and Distribution License (CDDL) v1.0|CDDL or GPLv2 with exceptions|GNU General Public License, Version 2 with the Classpath Exception|Dual license consisting of the CDDL v1.1 and GPL v2</licenseMerge>
+            <licenseMerge>Public Domain|Public Domain, per Creative Commons CC0|CC0 1.0 Universal|CC0|WTFPL</licenseMerge>
+            <licenseMerge>Eclipse Distribution License 1.0|Eclipse Distribution License (EDL), Version 1.0</licenseMerge>
+            <licenseMerge>Apache License, Version 1.1|Apache Software License, Version 1.1</licenseMerge>
+            <licenseMerge>GNU Lesser General Public License, Version 3.0|GNU Lesser General Public License|Lesser General Public License (LGPL) v 3.0|The GNU Lesser General Public License, Version 3.0|Lesser General Public License, version 3 or greater</licenseMerge>
+            <licenseMerge>GNU Lesser General Public License v2.1|GNU Library General Public License v2.1 or later|GNU Lesser General Public License v2.1 or later</licenseMerge>
+            <licenseMerge>BSD 2-Clause|BSD-2-Clause|The 2-Clause BSD License|BSD 2-Clause license|BSD 2-Clause License</licenseMerge>
+          </licenseMerges>
+          <excludedArtifacts>javax.ws.rs-api|javax.servlet-api</excludedArtifacts>
+          <excludedGroups>dom4j</excludedGroups>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.autonomic.tmc</groupId>
+            <artifactId>tmc-oss-license</artifactId>
+            <version>LOCAL-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>verify-dependency-licenses</id>
+            <goals>
+              <goal>add-third-party</goal>
+            </goals>
+            <phase>prepare-package</phase>
+          </execution>
+          <execution>
+            <id>first</id>
+            <goals>
+              <goal>update-project-license</goal>
+              <goal>update-file-header</goal>
+            </goals>
+            <phase>process-sources</phase>
+            <configuration>
+              <roots>
+                <root>src/main</root>
+                <root>src/test</root>
+              </roots>
+              <includes>
+                <include>**/*.java</include>
+                <include>**/*.groovy</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>
