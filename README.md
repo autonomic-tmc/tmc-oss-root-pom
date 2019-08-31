@@ -2,9 +2,13 @@
 
 ## Overview
 
-This module provides the "parent pom" for TMC OSS projects.
+This module provides the "parent pom" for centrally managing child project licensing and the distribution URL for TMC OSS projects.
 
-Using the `tmc-oss-parent` module as your "parent pom" will ensure the proper Apache 2 LICENSE file is created and the proper header is automatically added to source files when a project builds.
+Using the `tmc-oss-parent` module as your "parent pom" will ensure:
+ * The proper Apache 2 LICENSE file is created
+ * The proper header is automatically added to source files when a project builds
+ * The distribution management URL for publishing artifacts is provided
+
 
 More information about parent poms and maven configuration can be found here: [https://maven.apache.org/pom.html](https://maven.apache.org/pom.html)
 
