@@ -6,7 +6,10 @@ version: 2
 jobs:
   build:
     docker:
-    - image: mnebus/circleci:java-python
+      - image: autonomic-docker-ci-images.bintray.io/tmc-oss/java-ci
+        auth:
+          username: ${BT_OSS_USER}
+          password: ${BT_OSS_API_KEY}
 
     working_directory: ~/repo
 
@@ -36,7 +39,11 @@ jobs:
   #publish artifact to artifactory repo
   publish:
     docker:
-    - image: mnebus/circleci:java-python
+      - image: autonomic-docker-ci-images.bintray.io/tmc-oss/java-ci
+        auth:
+          username: ${BT_OSS_USER}
+          password: ${BT_OSS_API_KEY}
+
     working_directory: ~/repo
 
     environment:
@@ -58,11 +65,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-    - build
+    - build:
+        context: tmc-oss-context
   release:
     jobs:
     #Run Publish on GitHub release
     - publish:
+        context: tmc-oss-context
         filters:
           tags:
             only: /.*/
