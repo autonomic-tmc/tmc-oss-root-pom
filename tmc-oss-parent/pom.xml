@@ -10,7 +10,7 @@
 
   <parent>
     <groupId>com.autonomic.tmc</groupId>
-    <artifactId>tmc-root</artifactId>
+    <artifactId>tmc-oss-root</artifactId>
     <version>LOCAL-SNAPSHOT</version>
   </parent>
 
