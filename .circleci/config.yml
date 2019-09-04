@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java-ci:1.1.0
+      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java-ci
         auth:
           username: ${BT_OSS_USER}
           password: ${BT_OSS_API_KEY}
@@ -39,7 +39,7 @@ jobs:
   #publish artifact to artifactory repo
   publish:
     docker:
-      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java-ci:1.1.0
+      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java-ci
         auth:
           username: ${BT_OSS_USER}
           password: ${BT_OSS_API_KEY}
