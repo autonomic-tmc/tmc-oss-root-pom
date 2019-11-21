@@ -21,12 +21,76 @@
     <url>http://autonomic.ai</url>
   </organization>
 
+  <properties>
+    <date>${maven.build.timestamp}</date>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+    <projectName>[Au Open Source Library Toolkit]</projectName>
+    <support>support@autonomic.ai</support>
+    <licenseVersion>LOCAL-SNAPSHOT</licenseVersion>
+    <thirdPartyTemplate>${project.build.directory}/classes/tmc-oss-license/third-party-file.ftl</thirdPartyTemplate>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
+        <executions>
+          <execution>
+            <id>something</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.autonomic.tmc</groupId>
+                  <artifactId>tmc-oss-license</artifactId>
+                  <version>${licenseVersion}</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+              <includes>tmc-oss-license/third-party-file.ftl</includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <file>${project.build.directory}/classes/tmc-oss-license/third-party-file.ftl</file>
+          <replacements>
+            <replacement>
+              <token>@projectName@</token>
+              <value>${project.name}</value>
+            </replacement>
+            <replacement>
+              <token>@support@</token>
+              <value>support@autonomic.ai</value>
+            </replacement>
+            <replacement>
+              <token>@generated@</token>
+              <value>${date}</value>
+            </replacement>
+          </replacements>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>1.16</version>
+        <version>2.0.0</version>
         <configuration>
 
           <!-- - - - - - - - - - - - - - - - -
@@ -40,6 +104,11 @@
           <outputDirectory>${project.basedir}</outputDirectory>
           <licenseFile>${basedir}/LICENSE</licenseFile>
           <ignoreTag>(license-maven-plugin.skip)</ignoreTag>
+          <fileTemplate>${thirdPartyTemplate}</fileTemplate>
+          <extraTemplateParameters>
+            <myParameter>HiThere</myParameter>
+          </extraTemplateParameters>
+          <projectName>someName</projectName>
 
           <processStartTag>‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾</processStartTag>
           <processEndTag>______________________________________________________________________________</processEndTag>
@@ -76,7 +145,18 @@
           <dependency>
             <groupId>com.autonomic.tmc</groupId>
             <artifactId>tmc-oss-license</artifactId>
-            <version>LOCAL-SNAPSHOT</version>
+            <version>${licenseVersion}</version>
+          </dependency>
+          <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <scope>compile</scope>
+          </dependency>
+          <dependency>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <version>1.5.3</version>
           </dependency>
         </dependencies>
         <executions>
@@ -101,7 +181,6 @@
               </roots>
               <includes>
                 <include>**/*.java</include>
-                <include>**/*.groovy</include>
               </includes>
             </configuration>
           </execution>
