@@ -26,7 +26,7 @@
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <projectName>[Au Open Source Library Toolkit]</projectName>
     <support>support@autonomic.ai</support>
-    <licenseVersion>LOCAL-SNAPSHOT</licenseVersion>
+    <licenseVersion>${project.version}</licenseVersion>
     <thirdPartyTemplate>${project.build.directory}/classes/tmc-oss-license/third-party-file.ftl</thirdPartyTemplate>
   </properties>
 
@@ -93,7 +93,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>2.0.0</version>
+        <version>1.16</version>
         <configuration>
 
           <!-- - - - - - - - - - - - - - - - -
