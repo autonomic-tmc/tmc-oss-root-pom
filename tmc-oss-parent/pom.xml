@@ -73,14 +73,17 @@
           <file>${project.build.directory}/classes/tmc-oss-license/third-party-file.ftl</file>
           <replacements>
             <replacement>
+              <!--ignore errors on tokens-->
               <token>@projectName@</token>
               <value>${project.name}</value>
             </replacement>
             <replacement>
+              <!--ignore errors on tokens-->
               <token>@support@</token>
               <value>support@autonomic.ai</value>
             </replacement>
             <replacement>
+              <!--ignore errors on tokens-->
               <token>@generated@</token>
               <value>${date}</value>
             </replacement>
@@ -105,10 +108,6 @@
           <licenseFile>${basedir}/LICENSE</licenseFile>
           <ignoreTag>(license-maven-plugin.skip)</ignoreTag>
           <fileTemplate>${thirdPartyTemplate}</fileTemplate>
-          <extraTemplateParameters>
-            <myParameter>HiThere</myParameter>
-          </extraTemplateParameters>
-          <projectName>someName</projectName>
 
           <processStartTag>‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾</processStartTag>
           <processEndTag>______________________________________________________________________________</processEndTag>
