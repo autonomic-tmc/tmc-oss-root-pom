@@ -73,17 +73,17 @@
           <file>${project.build.directory}/classes/tmc-oss-license/third-party-file.ftl</file>
           <replacements>
             <replacement>
-              <!--ignore errors on tokens-->
+              <!-- Some IDEs might not like the naming conventions we used for our tokens -->
               <token>@projectName@</token>
               <value>${project.name}</value>
             </replacement>
             <replacement>
-              <!--ignore errors on tokens-->
+              <!-- Some IDEs might not like the naming conventions we used for our tokens -->
               <token>@support@</token>
               <value>support@autonomic.ai</value>
             </replacement>
             <replacement>
-              <!--ignore errors on tokens-->
+              <!-- Some IDEs might not like the naming conventions we used for our tokens -->
               <token>@generated@</token>
               <value>${date}</value>
             </replacement>

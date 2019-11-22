@@ -28,13 +28,12 @@ Date Generated: @generated@
         <#return p.name + " (" + p.groupId + ":" + p.artifactId + ":" + p.version + " - " + (p.url!"no url defined") + ")">
     </#if>
 </#function>
-
 <#if dependencyMap?size == 0>
 The project has no dependencies.
 <#else>
     <#list dependencyMap as e>
         <#assign project = e.getKey()/>
         <#assign licenses = e.getValue()/>
-    ${licenseFormat(licenses)} ${artifactFormat(project)}
+${licenseFormat(licenses)} ${artifactFormat(project)}
     </#list>
 </#if>
