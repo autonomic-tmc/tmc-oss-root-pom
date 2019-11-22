@@ -34,7 +34,8 @@
 
   <distributionManagement>
     <repository>
-      <id>au-tmc-oss-repo</id>
+      <id>bintray-autonomic-au-tmc-oss</id>
+      <name>autonomic-au-tmc-oss</name>
       <url>https://api.bintray.com/maven/autonomic/au-tmc-oss/${project.artifactId}/;publish=1</url>
     </repository>
   </distributionManagement>

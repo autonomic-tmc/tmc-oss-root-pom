@@ -77,10 +77,10 @@ jobs:
 
       - restore_cache:
           keys:
-            - v3-publish-dependencies-{{ checksum "pom.xml" }}
+            - v3-publish-dependencies-{{ checksum "pom-ext.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v3-publish-dependencies-
-      - run: mvn versions:set -DnewVersion=${CIRCLE_TAG} -fpom-ext.xml
+      - run: mvn versions:set -DnewVersion=${CIRCLE_TAG} -fpom-ext.xml install
       - run: mvn deploy -fpom-ext.xml
 
 
