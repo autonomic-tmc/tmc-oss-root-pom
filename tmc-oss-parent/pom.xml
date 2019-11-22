@@ -38,7 +38,7 @@
         <version>2.8</version>
         <executions>
           <execution>
-            <id>something</id>
+            <id>share-template</id>
             <phase>process-resources</phase>
             <goals>
               <goal>unpack</goal>
