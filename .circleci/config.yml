@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: autonomic-docker-public-images.bintray.io/tmc-oss/java
+      - image: autonomic-docker-public-images.bintray.io/tmc/java
         auth:
           username: ${BT_PUBLIC_USERNAME}
           password: ${BT_PUBLIC_API_TOKEN}
