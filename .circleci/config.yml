@@ -2,11 +2,11 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
-      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java
+      - image: autonomic-docker-public-images.bintray.io/tmc-oss/java
         auth:
           username: ${BT_PUBLIC_USERNAME}
           password: ${BT_PUBLIC_API_TOKEN}
@@ -88,7 +88,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-    - build:
+    - build
   release:
     jobs:
     #Run Publish on GitHub release
