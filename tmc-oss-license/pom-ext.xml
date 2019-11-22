@@ -5,6 +5,7 @@
     <groupId>com.autonomic.tmc</groupId>
     <artifactId>tmc-oss-root</artifactId>
     <version>LOCAL-SNAPSHOT</version>
+    <relativePath>../pom-ext.xml</relativePath>
   </parent>
 
   <artifactId>tmc-oss-license</artifactId>
