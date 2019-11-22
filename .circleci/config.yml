@@ -2,14 +2,14 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java-ci
+      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java
         auth:
-          username: ${BT_OSS_USER}
-          password: ${BT_OSS_API_KEY}
+          username: ${BT_PUBLIC_USERNAME}
+          password: ${BT_PUBLIC_API_TOKEN}
 
     working_directory: ~/repo
 
@@ -37,12 +37,12 @@ jobs:
 
 
   #publish artifact to artifactory repo
-  publish:
+  publish-public:
     docker:
-      - image: autonomic-docker-circle-ci-images.bintray.io/tmc-oss/java-ci
+      - image: autonomic-docker-public-images.bintray.io/tmc/java
         auth:
-          username: ${BT_OSS_USER}
-          password: ${BT_OSS_API_KEY}
+          username: ${BT_PUBLIC_USERNAME}
+          password: ${BT_PUBLIC_API_TOKEN}
 
     working_directory: ~/repo
 
@@ -60,18 +60,45 @@ jobs:
     - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
     - run: mvn deploy
 
+  publish-private:
+    docker:
+      - image: autonomic-docker-private-images.bintray.io/tmc/java
+        auth:
+          username: ${BT_PRIVATE_USERNAME}
+          password: ${BT_PRIVATE_API_TOKEN}
+
+    working_directory: ~/repo
+
+    environment:
+      JAVA_TOOL_OPTIONS: -Xmx1024m
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v3-publish-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v3-publish-dependencies-
+      - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
+      - run: mvn deploy
+
 
 workflows:
   version: 2
   build_and_test:
     jobs:
     - build:
-        context: tmc-oss-context
   release:
     jobs:
     #Run Publish on GitHub release
-    - publish:
-        context: tmc-oss-context
+    - publish-public:
+        filters:
+          tags:
+            only: /.*/
+          branches:
+            ignore: /.*/
+    - publish-private:
         filters:
           tags:
             only: /.*/
