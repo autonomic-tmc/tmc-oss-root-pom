@@ -60,30 +60,6 @@ jobs:
     - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
     - run: mvn deploy
 
-  publish-private:
-    docker:
-      - image: autonomic-docker-private-images.bintray.io/tmc/java
-        auth:
-          username: ${BT_PRIVATE_USERNAME}
-          password: ${BT_PRIVATE_API_TOKEN}
-
-    working_directory: ~/repo
-
-    environment:
-      JAVA_TOOL_OPTIONS: -Xmx1024m
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - v3-publish-dependencies-{{ checksum "pom-ext.xml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v3-publish-dependencies-
-      - run: mvn versions:set -DnewVersion=${CIRCLE_TAG} -fpom-ext.xml
-      - run: mvn install deploy -fpom-ext.xml
-
-
 workflows:
   version: 2
   build_and_test:
@@ -93,12 +69,6 @@ workflows:
     jobs:
     #Run Publish on GitHub release
     - publish-public:
-        filters:
-          tags:
-            only: /.*/
-          branches:
-            ignore: /.*/
-    - publish-private:
         filters:
           tags:
             only: /.*/
