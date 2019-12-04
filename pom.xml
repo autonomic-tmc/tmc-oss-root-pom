@@ -7,7 +7,6 @@
   <version>LOCAL-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-
   <name>TMC OSS Root POM</name>
 
   <organization>
@@ -26,7 +25,6 @@
     <module>tmc-oss-parent</module>
   </modules>
 
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -39,6 +37,4 @@
       <url>https://api.bintray.com/maven/autonomic/au-tmc-oss/${project.artifactId}/;publish=1</url>
     </repository>
   </distributionManagement>
-
-
 </project>
