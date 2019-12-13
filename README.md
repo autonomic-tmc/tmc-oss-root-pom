@@ -27,7 +27,7 @@ More information about parent poms and maven configuration can be found here: [h
   <parent>
     <groupId>com.autonomic.tmc</groupId>
     <artifactId>tmc-oss-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.1-alpha</version>
   </parent>
 
   <name>Example Project</name>
