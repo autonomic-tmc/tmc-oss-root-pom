@@ -19,19 +19,21 @@ jobs:
     steps:
     - checkout
 
+    - run: mvn clean 
+
     # Download and cache dependencies
     - restore_cache:
         keys:
-        - v3-dependencies-{{ checksum "pom.xml" }}
+        - v3-dependencies-{{ checksum "pom.xml" }}-{{ checksum "tmc-oss-license/pom.xml" }}-{{ checksum "tmc-oss-parent/pom.xml" }}
 
-    - run: mvn dependency:go-offline
+    - run: mvn dependency:go-offline 
 
-    - run: mvn clean package
+    - run: mvn package 
 
     - save_cache:
         paths:
         - ~/.m2
-        key: v3-dependencies-{{ checksum "pom.xml" }}
+        key: v3-dependencies-{{ checksum "pom.xml" }}-{{ checksum "tmc-oss-license/pom.xml" }}-{{ checksum "tmc-oss-parent/pom.xml" }}
 
 
   #publish artifact to artifactory repo
@@ -52,9 +54,30 @@ jobs:
 
     - restore_cache:
         keys:
-        - v3-publish-dependencies-{{ checksum "pom.xml" }}
+        - v3-dependencies-{{ checksum "pom.xml" }}-{{ checksum "tmc-oss-license/pom.xml" }}-{{ checksum "tmc-oss-parent/pom.xml" }}
     - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
-    - run: mvn deploy
+    - run: mvn deploy -Ppublic
+
+  publish-private:
+    docker:
+      - image: autonomic-docker-private-images.bintray.io/tmc/java
+        auth:
+          username: ${BT_PRIVATE_USERNAME}
+          password: ${BT_PRIVATE_API_TOKEN}
+
+    working_directory: ~/repo
+
+    environment:
+      JAVA_TOOL_OPTIONS: -Xmx1024m
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v3-dependencies-{{ checksum "pom.xml" }}-{{ checksum "tmc-oss-license/pom.xml" }}-{{ checksum "tmc-oss-parent/pom.xml" }}
+    - run: mvn versions:set -DnewVersion=${CIRCLE_TAG} 
+    - run: mvn deploy -Pprivate
 
 workflows:
   version: 2
@@ -65,6 +88,12 @@ workflows:
     jobs:
     #Run Publish on GitHub release
     - publish-public:
+        filters:
+          tags:
+            only: /.*/
+          branches:
+            ignore: /.*/
+    - publish-private:
         filters:
           tags:
             only: /.*/
