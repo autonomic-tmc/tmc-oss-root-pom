@@ -34,7 +34,7 @@
     <profile>
       <id>public</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <distributionManagement>
         <repository>
