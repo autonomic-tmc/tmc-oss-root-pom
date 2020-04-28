@@ -1,0 +1,17 @@
+The TMC OSS Parent POM may include third party dependencies licensed under the following terms.
+This list was generated using third party software as of the date listed. This list
+may change with specific versions of the TMC OSS Parent POM and may not be complete;
+it is provided “As-Is.”
+
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, AUTONOMIC AND ITS AFFILIATES MAKE NO REPRESENTATIONS OR
+WARRANTIES, EXPRESS OR IMPLIED, STATUTORY OR OTHERWISE, WITH REGARD TO THE LIST OR ITS ACCURACY OR
+COMPLETENESS, OR WITH RESPECT TO ANY RESULTS TO BE OBTAINED FROM USE OR DISTRIBUTION OF THE LIST. BY
+USING OR DISTRIBUTING THE LIST, YOU AGREE THAT IN NO EVENT SHALL AUTONOMIC OR ITS AFFILIATES BE HELD
+LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY OTHER DAMAGES WHATSOEVER
+RESULTING FROM ANY USE OR DISTRIBUTION OF THIS LIST.
+
+In case of any license issues related to TMC OSS Parent POM, please contact support@autonomic.ai.
+
+Date Generated: 2020-04-22 02:40
+
+The project has no dependencies.
