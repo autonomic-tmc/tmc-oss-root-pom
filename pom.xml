@@ -144,7 +144,7 @@
             </executions>
             <configuration>
               <dependencyTrackBaseUrl>${env.DEP_TRACK_URL}</dependencyTrackBaseUrl>
-              <apiKey>${env.DEP_TRACK_API_KEY}</apiKey>
+              <apiKey>${env.DEP_TRACK_API_TOKEN}</apiKey>
             </configuration>
           </plugin>
         </plugins>
