@@ -110,7 +110,7 @@
             <executions>
               <execution>
                 <id>cyclone-dx</id>
-                <phase>verify</phase>
+                <phase>validate</phase>
                 <goals>
                   <goal>makeAggregateBom</goal>
                 </goals>
@@ -136,7 +136,7 @@
             <executions>
               <execution>
                 <id>upload-bom</id>
-                <phase>verify</phase>
+                <phase>validate</phase>
                 <goals>
                   <goal>upload-bom</goal>
                 </goals>
