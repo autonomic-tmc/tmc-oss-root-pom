@@ -38,9 +38,9 @@
       </activation>
       <distributionManagement>
         <repository>
-          <id>bintray-autonomic-au-tmc-oss</id>
+          <id>cloudsmith-autonomic-au-tmc-oss</id>
           <name>autonomic-au-tmc-oss</name>
-          <url>https://api.bintray.com/maven/autonomic/au-tmc-oss/${project.artifactId}/;publish=1</url>
+          <url>https://maven.cloudsmith.io/autonomic/au-tmc-oss/</url>
         </repository>
       </distributionManagement>
     </profile>
@@ -51,9 +51,9 @@
       </activation>
       <distributionManagement>
         <repository>
-          <id>bintray-autonomic-au-tmc-ext</id>
+          <id>cloudsmith-autonomic-au-tmc-ext</id>
           <name>autonomic-au-tmc-ext</name>
-          <url>https://api.bintray.com/maven/autonomic/au-tmc-ext/${project.artifactId}/;publish=1</url>
+          <url>https://maven.cloudsmith.io/autonomic/au-tmc-ext/</url>
         </repository>
       </distributionManagement>
     </profile>
