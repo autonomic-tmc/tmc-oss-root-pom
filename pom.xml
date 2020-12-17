@@ -39,7 +39,7 @@
       <distributionManagement>
         <repository>
           <id>au-tmc-oss-repo</id>
-          <name>autonomic-au-tmc-oss</name>
+          <name>au-tmc-oss-repo</name>
           <url>https://maven.cloudsmith.io/autonomic/au-tmc-oss/</url>
         </repository>
       </distributionManagement>
