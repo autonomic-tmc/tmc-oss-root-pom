@@ -62,11 +62,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-    - build
+    - build:
+        context: tmc-cloudsmith-context
   release:
     jobs:
     #Run Publish on GitHub release
     - publish-public:
+        context: tmc-cloudsmith-context
         filters:
           tags:
             only: /.*/
