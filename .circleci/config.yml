@@ -143,6 +143,11 @@ workflows:
             branches:
               ignore: /.*/
       - build:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/    
           requires:
             - scan_secrets
           context:
