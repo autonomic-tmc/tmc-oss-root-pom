@@ -112,7 +112,7 @@
               <includeRuntimeScope>true</includeRuntimeScope>
               <includeSystemScope>true</includeSystemScope>
               <includeTestScope>false</includeTestScope>
-              <includeLicenseText>false</includeLicenseText>
+              <includeLicenseText>true</includeLicenseText>
               <outputFormat>all</outputFormat>
             </configuration>
           </plugin>
