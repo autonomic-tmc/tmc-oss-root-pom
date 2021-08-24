@@ -108,6 +108,7 @@
           <licenseFile>${basedir}/LICENSE</licenseFile>
           <ignoreTag>(license-maven-plugin.skip)</ignoreTag>
           <fileTemplate>${thirdPartyTemplate}</fileTemplate>
+          <canUpdateCopyright>true</canUpdateCopyright>
 
           <processStartTag>‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾</processStartTag>
           <processEndTag>______________________________________________________________________________</processEndTag>
