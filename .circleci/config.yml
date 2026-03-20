@@ -10,10 +10,10 @@ executors:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx1024m
     docker:
-      - image: docker.cloudsmith.io/autonomic/public-images/java
+      - image: ${JFROG_DOCKER_HOST}/tmc-private-images/java17
         auth:
-          username: ${CS_PUBLIC_USERNAME}
-          password: ${CS_PUBLIC_API_TOKEN}
+          username: ${JFROG_USERNAME}
+          password: ${JFROG_TOKEN}
   snapshot-publisher-image:
     working_directory: ~/repo
     environment:
