@@ -100,7 +100,18 @@ jobs:
           command: /root/publish.sh publish_snapshot
       - run:
           name: Run FOSSA Analysis
-          command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json
+          command: |
+            fossa analyze \
+              --with-telemetry-scope off \
+              --endpoint "https://ford.fossa.com/" \
+              --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" \
+              --team "TMC-50844" \
+              --policy "Website/Hosted Service Use" \
+              --branch "<<pipeline.git.branch>>" \
+              --revision "<<pipeline.git.revision>>" \
+              --project-url "<<pipeline.project.git_url>>" \
+              --project-label "team:telemetry-data" \
+              --json
       - run:
           name: Fail build if FOSSA issues
           command: fossa test --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
@@ -117,10 +128,21 @@ jobs:
       - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
       - run:
           name: Upload to Dependency Track
-          command: mvn validate
+          command: mvn install
       - run:
           name: Run FOSSA Analysis
-          command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json
+          command: |
+            fossa analyze \
+              --with-telemetry-scope off \
+              --endpoint "https://ford.fossa.com/" \
+              --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" \
+              --team "TMC-50844" \
+              --policy "Website/Hosted Service Use" \
+              --branch "<<pipeline.git.branch>>" \
+              --revision "<<pipeline.git.revision>>" \
+              --project-url "<<pipeline.project.git_url>>" \
+              --project-label "team:telemetry-data" \
+              --json
       - run:
           name: Fail build if FOSSA issues
           command: fossa test --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
