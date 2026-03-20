@@ -70,7 +70,7 @@ jobs:
           command: |
             mvn deploy \
               -Pcloudsmith-autonomic-au-tmc-oss \
-              -DaltDeploymentRepository="cloudsmith-autonomic-au-tmc-oss::docker.cloudsmith.io/autonomic/au-tmc-oss" \
+              -DaltDeploymentRepository="cloudsmith-autonomic-au-tmc-oss::https://maven.cloudsmith.io/autonomic/au-tmc-oss" \
               -DskipTests
   publish-public-jfrog:
     executor: snapshot-publisher-image
@@ -117,7 +117,7 @@ jobs:
       - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
       - run:
           name: Upload to Dependency Track
-          command: mvn validate -Ddependency-track.projectName=${CIRCLE_PROJECT_REPONAME} -Pdependency-track
+          command: mvn validate
       - run:
           name: Run FOSSA Analysis
           command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json --exclude-path examples/ tmc-feed-consumer
