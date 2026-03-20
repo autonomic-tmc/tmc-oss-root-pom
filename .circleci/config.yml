@@ -138,7 +138,7 @@ jobs:
               --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" \
               --team "TMC-50844" \
               --policy "Website/Hosted Service Use" \
-              --branch "<<pipeline.git.branch>>" \
+              --branch "main" \
               --revision "<<pipeline.git.revision>>" \
               --project-url "<<pipeline.project.git_url>>" \
               --project-label "team:telemetry-data" \
