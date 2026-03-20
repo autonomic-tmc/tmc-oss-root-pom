@@ -100,7 +100,7 @@ jobs:
           command: /root/publish.sh publish_snapshot
       - run:
           name: Run FOSSA Analysis
-          command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json --exclude-path examples/ tmc-feed-consumer
+          command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json
       - run:
           name: Fail build if FOSSA issues
           command: fossa test --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
@@ -120,7 +120,7 @@ jobs:
           command: mvn validate
       - run:
           name: Run FOSSA Analysis
-          command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json --exclude-path examples/ tmc-feed-consumer
+          command: fossa analyze --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"   --team "TMC-50844"   --policy "Website/Hosted Service Use"   --branch "<<pipeline.git.branch>>"   --revision "<<pipeline.git.revision>>"   --project-url "<<pipeline.project.git_url>>"   --project-label "team:realtime"  --json
       - run:
           name: Fail build if FOSSA issues
           command: fossa test --with-telemetry-scope off  --endpoint "https://ford.fossa.com/"  --project "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
