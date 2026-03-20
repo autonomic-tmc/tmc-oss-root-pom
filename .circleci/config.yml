@@ -19,17 +19,17 @@ executors:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx1024m
     docker:
-      - image: docker.cloudsmith.io/autonomic/private-images/java
+      - image: ${JFROG_DOCKER_HOST}/tmc-private-images/java
         auth:
-          username: ${CS_PUBLIC_USERNAME}
-          password: ${CS_PUBLIC_API_TOKEN}
+          username: ${JFROG_USERNAME}
+          password: ${JFROG_TOKEN}
   gitleaks-image:
     working_directory: ~/repo
     docker:
-      - image: docker.cloudsmith.io/autonomic/private-images/gitleaks
+      - image: ${JFROG_DOCKER_HOST}/tmc-private-images/gitleaks
         auth:
-          username: ${CS_PRIVATE_USERNAME}
-          password: ${CS_PRIVATE_API_TOKEN}
+          username: ${JFROG_USERNAME}
+          password: ${JFROG_TOKEN}
 jobs:
   scan_secrets:
     executor: gitleaks-image
@@ -37,7 +37,7 @@ jobs:
       - checkout
       - run: gitleaks
   build:
-    executor: java-image
+    executor: snapshot-publisher-image
     steps:
     - checkout
     - run: mvn clean
@@ -68,6 +68,19 @@ jobs:
       - run:
           name: Publish to tmc-oss-root-pom
           command: /root/publish.sh publish_public
+  publish-public-jfrog:
+    executor: snapshot-publisher-image
+    steps:
+      - attach_workspace:
+          at: /root
+      - run: mvn versions:set -DnewVersion=${CIRCLE_TAG}
+      - run:
+          name: Publish to tmc-oss-root-pom
+          command: |
+            mvn deploy \
+              -Pford-supplier-jfrog-artifactory-tmc-oss \
+              -DaltDeploymentRepository="ford-supplier-jfrog-artifactory-tmc-oss::${JFROG_URL}/${JFROG_REPO_TMC_OSS}" \
+              -DskipTests
 
   private-snapshot-dependency-track:
     executor: snapshot-publisher-image
@@ -81,9 +94,24 @@ jobs:
       - run:
           name: Publish tmc-oss-root-pom-private to au-tmc-snapshots
           command: /root/publish.sh publish_snapshot
+
+  private-snapshot-jfrog-dependency-track:
+    executor: snapshot-publisher-image
+    working_directory: /root/repo
+    steps:
+      - attach_workspace:
+          at: /root
+      - run:
+          name: set new version
+          command: mvn versions:set -DnewVersion=LATEST-SNAPSHOT
+      - run:
+          name: Publish tmc-oss-root-pom-private to au-tmc-snapshots
+          command: /root/publish.sh publish_snapshot
       - run:
           name: Upload to Dependency Track
-          command: mvn validate -Ddependency-track.projectName=${CIRCLE_PROJECT_REPONAME} -Pdependency-track
+          command: |
+            mvn deploy -Pford-supplier-jfrog-artifactory-snapshots \
+              -DaltDeploymentRepository="ford-supplier-jfrog-artifactory-snapshots::default::${JFROG_URL}/${JFROG_REPO_SNAPSHOTS}"
 
   dependency-track:
     executor: java-image
@@ -108,15 +136,30 @@ workflows:
   build_and_test:
     jobs:
     - scan_secrets:
-        context: tmc-cloudsmith-context
+        context:
+            - tmc-cloudsmith-context
+            - ford-supplier-jfrog-context
     - build:
-        context: tmc-cloudsmith-context
+        context:
+            - tmc-cloudsmith-context
+            - ford-supplier-jfrog-context
         requires:
           - scan_secrets
     - private-snapshot-dependency-track:
         context:
           - tmc-cloudsmith-context
           - tmc-oss-context
+          - ford-supplier-jfrog-context
+        requires:
+          - build
+        filters:
+          branches:
+            only: rc
+    - private-snapshot-jfrog-dependency-track:
+        context:
+          - tmc-cloudsmith-context
+          - tmc-oss-context
+          - ford-supplier-jfrog-context
         requires:
           - build
         filters:
@@ -126,6 +169,7 @@ workflows:
         context:
           - tmc-cloudsmith-context
           - tmc-oss-context
+          - ford-supplier-jfrog-context
         requires:
           - build
         filters:
@@ -136,7 +180,9 @@ workflows:
   release:
     jobs:
       - scan_secrets:
-          context: tmc-cloudsmith-context
+          context:
+            - tmc-cloudsmith-context
+            - ford-supplier-jfrog-context
           filters:
             tags:
               only: /.*/
@@ -152,11 +198,25 @@ workflows:
             - scan_secrets
           context:
             - tmc-cloudsmith-context
+            - ford-supplier-jfrog-context
     #Run Publish on GitHub release
       - publish-public:
           context:
             - tmc-cloudsmith-context
             - tmc-oss-context
+            - ford-supplier-jfrog-context
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - publish-public-jfrog:
+          context:
+            - tmc-cloudsmith-context
+            - tmc-oss-context
+            - ford-supplier-jfrog-context
           requires:
             - build
           filters:
@@ -168,6 +228,7 @@ workflows:
           context:
             - tmc-cloudsmith-context
             - tmc-oss-context
+            - ford-supplier-jfrog-context
           requires:
             - build
           filters:
