@@ -101,7 +101,11 @@ jobs:
           command: mvn versions:set -DnewVersion=LATEST-SNAPSHOT
       - run:
           name: Publish tmc-oss-root-pom-private to au-tmc-snapshots
-          command: /root/publish.sh publish_snapshot
+          command: |
+            mvn deploy \
+              -Pford-supplier-jfrog-artifactory-snapshots \
+              -DaltDeploymentRepository="ford-supplier-jfrog-artifactory-snapshots::default::${JFROG_URL}/${JFROG_REPO_SNAPSHOTS}" \
+              -DskipTests
       - run:
           name: Run FOSSA Analysis
           command: |
